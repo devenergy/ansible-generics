@@ -8,7 +8,7 @@
   failed_when: False
 
 - name: "Create the empty swap file, 2/2: try dd if fallocate failed."
-  when: create_new_swap_file_fallocate_result|failed
+  when: create_new_swap_file_fallocate_result is failed
   command: >
     dd if=/dev/zero of={{ swap_file_path }} bs=1048576 count={{ swap_file_size_mb }}
   register: create_new_swap_file_dd_result
