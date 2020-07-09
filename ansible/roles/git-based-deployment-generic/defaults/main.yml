@@ -2,3 +2,4 @@
 
 apt_git_release: stable
 git_version: master
+project_git_version: master
