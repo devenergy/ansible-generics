@@ -11,8 +11,8 @@
     state=present
 
 - name: Make sure the Docker packages are installed.
-  apt: >
-    pkg={{ item }} state=latest
-  with_items:
-    - docker-engine
-    - python-docker
+  apt:
+    pkg:
+      - docker-engine
+      - python-docker
+    state: latest

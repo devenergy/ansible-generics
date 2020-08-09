@@ -2,23 +2,26 @@
 # Any PostgreSQL replica set member
 
 - name: "Install needed APT packages."
-  apt: >
-    pkg={{ item }}
-    state=latest default_release={{ apt_postgresql_release }}
-    install_recommends=no
-    update_cache=yes cache_valid_time={{ apt_cache_valid_secs }}
-  with_items:
-    - python-psycopg2  # so that Ansible PG-related actions work
+  apt:
+    pkg:
+      - python-psycopg2  # so that Ansible PG-related actions work
+    state: latest
+    default_release: "{{ apt_postgresql_release }}"
+    install_recommends: no
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_secs }}"
 
 - name: "Install PostgreSQL server."
-  apt: >
-    pkg={{ item }}
-    state=latest default_release={{ apt_postgresql_release }}
-    install_recommends=no
-    update_cache=yes cache_valid_time={{ apt_cache_valid_secs }}
-  with_items:
-    - postgresql-{{ postgresql_version }}
-    - postgresql-contrib-{{ postgresql_version }}
+  apt:
+    pkg:
+      - "postgresql-{{ postgresql_version }}"
+      - "postgresql-contrib-{{ postgresql_version }}"
+    state: latest
+    default_release: "{{ apt_postgresql_release }}"
+    install_recommends: no
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_secs }}"
+
 
 - name: "Configure pg_hba (for maintenance user, replication, all private users and all private databases)."
   become_user: postgres
@@ -56,6 +59,5 @@
     # * effective_io_concurrency: best guess for an SSD for now is 2
     - key: effective_io_concurrency
       value: "2"
-
   notify:
     - restart postgresql

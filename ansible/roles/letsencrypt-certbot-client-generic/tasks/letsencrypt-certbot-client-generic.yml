@@ -1,13 +1,15 @@
 ---
 
 - name: Install Certbot.
-  apt: >
-    pkg={{ item }}
-    state=latest default_release={{ apt_certbot_release }}
-    install_recommends=no
-    update_cache=yes cache_valid_time={{ apt_cache_valid_secs }}
-  with_items:
-    - certbot
+  apt:
+    pkg:
+      - certbot
+    state: latest
+    default_release: "{{ apt_certbot_release }}"
+    install_recommends: no
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_secs }}"
+
 
 - name: Prepare directory to serve.
   file:

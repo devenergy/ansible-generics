@@ -1,14 +1,15 @@
 ---
 
 - name: Install Gunicorn server.
-  apt: >
-    pkg={{ item }}
-    state=latest default_release={{ apt_gunicorn_release }}
-    install_recommends=no
-    update_cache=yes cache_valid_time={{ apt_cache_valid_secs }}
-  with_items:
-    - python-setuptools
-    - gunicorn
+  apt:
+    pkg:
+      - python-setuptools
+      - gunicorn
+    state: latest
+    default_release: "{{ apt_gunicorn_release }}"
+    install_recommends: no
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_secs }}"
   notify:
     - start gunicorn
 

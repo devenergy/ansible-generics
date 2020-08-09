@@ -3,16 +3,18 @@
 # https://wiki.debian.org/Locale
 
 - name: 'Funny, but `locales` package may be missing.'
-  apt: >
-    pkg={{ item }}
-    state=latest default_release=stable
-    install_recommends=no
-    update_cache=yes cache_valid_time={{ apt_cache_valid_secs }}
-  with_items:
-    - locales
-    - libc-bin
+  apt:
+    pkg:
+      - locales
+      - libc-bin
+    state: latest
+    default_release: stable
+    install_recommends: no
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_secs }}"
 
-- name: Generate missing locale.
+
+- name: "Generate missing locale."
   locale_gen: name={{ item }} state=present
   with_items:
     - en_US.UTF-8

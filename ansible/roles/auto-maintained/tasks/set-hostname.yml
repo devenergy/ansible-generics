@@ -7,4 +7,5 @@
     line="127.0.0.1       {{ inventory_hostname.split('.')[0] }}"
 
 - name: Set hostname.
-  hostname: name={{ inventory_hostname.split('.')[0] }}
+  hostname:
+    name: "{{ inventory_hostname.split('.')[0] }}"

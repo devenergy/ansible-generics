@@ -1,5 +1,5 @@
 ---
 
-apt_certbot_release: testing
+apt_certbot_release: stable
 webroot_user: www-data
 webroot_group: www-data

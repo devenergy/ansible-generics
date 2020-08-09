@@ -1,13 +1,14 @@
 ---
 
 - name: Install Nginx server.
-  apt: >
-    pkg={{ item }}
-    state=latest default_release={{ apt_nginx_release }}
-    update_cache=yes cache_valid_time={{ apt_cache_valid_secs }}
-  with_items:
-    - nginx-full
-    - openssl
+  apt:
+    pkg:
+      - nginx-full
+      - openssl
+    state: latest
+    default_release: "{{ apt_nginx_release }}"
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_secs }}"
   notify:
     - start nginx
 
