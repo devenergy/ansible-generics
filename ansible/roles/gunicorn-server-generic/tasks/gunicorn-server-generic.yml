@@ -25,7 +25,7 @@
   file: >
     state=absent
     path="/etc/gunicorn.d/{{ gunicorn_site_conf_template|format(item) }}"
-  when: "{{ (item not in gunicorn_sites_enabled)|bool }}"
+  when: (item not in gunicorn_sites_enabled)|bool
   with_items: "{{ gunicorn_sites_available }}"
   notify:
     - restart gunicorn

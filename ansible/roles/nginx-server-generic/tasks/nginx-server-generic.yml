@@ -80,7 +80,7 @@
   file: >
     state=absent
     path=/etc/nginx/sites-enabled/{{ nginx_site_conf_template|format(item) }}
-  when: "{{ (item not in nginx_sites_enabled)|bool }}"
+  when: (item not in nginx_sites_enabled)|bool
   with_items: "{{ nginx_sites_available }},default"
   notify:
     - restart nginx
