@@ -1,2 +1,3 @@
 ---
 allow_duplicates: yes
+apt_mercurial_release: stable

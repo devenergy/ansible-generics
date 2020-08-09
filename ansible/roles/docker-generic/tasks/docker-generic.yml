@@ -16,3 +16,5 @@
       - docker-engine
       - python-docker
     state: latest
+    default_release: "{{ apt_docker_release }}"
+    install_recommends: no
